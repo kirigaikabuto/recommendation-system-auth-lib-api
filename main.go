@@ -66,7 +66,7 @@ func run(c *cli.Context) error {
 	}
 	parseEnvFile()
 	amqpConfig := amqp.Config{
-		AMQPUrl: amqpHost + ":" + strconv.Itoa(amqpPort),
+		AMQPUrl: "amqp://" + amqpHost + ":" + strconv.Itoa(amqpPort),
 	}
 	sess := amqp.NewSession(amqpConfig)
 	err := sess.Connect()
@@ -84,7 +84,7 @@ func run(c *cli.Context) error {
 
 	router.Methods("POST").Path("/score").HandlerFunc(httpEndpoints.MakeCreateScoreEndpoint())
 	router.Methods("GET").Path("/score}").HandlerFunc(httpEndpoints.MakeListScoreEndpoint())
-
+	fmt.Println("server is running on port " + port)
 	http.ListenAndServe(":"+port, router)
 	return nil
 }
