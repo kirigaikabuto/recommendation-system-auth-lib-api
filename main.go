@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
 	setdata_common "github.com/kirigaikabuto/setdata-common"
+	redis_lib "github.com/kirigaikabuto/setdata-common/redis_connect"
 	"github.com/urfave/cli"
 	"net/http"
 	"os"
@@ -77,13 +78,20 @@ func run(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+	redisStore, err := redis_lib.NewRedisConnectStore(redis_lib.RedisConfig{
+		Host: "localhost",
+		Port: "6379",
+	})
 	amqpRequests := auth_lib.NewAmqpRequests(clt)
-	service := auth_lib.NewAuthLibService(amqpRequests)
+	service := auth_lib.NewAuthLibService(amqpRequests, *redisStore)
 	httpEndpoints := auth_lib.NewHttpEndpoints(setdata_common.NewCommandHandler(service))
 	router := mux.NewRouter()
 
 	router.Methods("POST").Path("/score").HandlerFunc(httpEndpoints.MakeCreateScoreEndpoint())
 	router.Methods("GET").Path("/score").HandlerFunc(httpEndpoints.MakeListScoreEndpoint())
+
+	router.Methods("POST").Path("/users/login").HandlerFunc(httpEndpoints.MakeLoginEndpoint())
+	router.Methods("POST").Path("/users/register").HandlerFunc(httpEndpoints.MakeRegisterEndpoint())
 	fmt.Println("server is running on port " + port)
 	http.ListenAndServe(":"+port, router)
 	return nil
