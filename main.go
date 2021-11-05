@@ -8,6 +8,7 @@ import (
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
 	setdata_common "github.com/kirigaikabuto/setdata-common"
 	redis_lib "github.com/kirigaikabuto/setdata-common/redis_connect"
+
 	"github.com/urfave/cli"
 	"net/http"
 	"os"

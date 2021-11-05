@@ -31,6 +31,8 @@ github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105125059-1a
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105125059-1a9c3961e0b2/go.mod h1:ZuwQ2GTkWbO1bJvdxiK2ql3uM+mJ34b5vjNacpX1b2U=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105125745-fd114a969f49 h1:0juVGezCzhAhZyorKaglcv3EoPJ+sP6WH3CLaJNtWMk=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105125745-fd114a969f49/go.mod h1:ZuwQ2GTkWbO1bJvdxiK2ql3uM+mJ34b5vjNacpX1b2U=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105130117-764e5400b4ef h1:2Lq9GI46WB556We7Oe3ZgLDBtURRMVl8NBz308zxe0o=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211105130117-764e5400b4ef/go.mod h1:ZuwQ2GTkWbO1bJvdxiK2ql3uM+mJ34b5vjNacpX1b2U=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f h1:mgBc7cOPbrq4OlQJeimXfTOF2gv3dby69FT/NUqs5LI=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f/go.mod h1:RLEbCI9YiFH5E5JIAhU5wtmgtDzNASHNTScJIui1Y4s=
 github.com/kirigaikabuto/recommendation-system-score-store v0.0.0-20211104112242-1f62f5f6a39f h1:+FMFqhNIEL8OWOkJsHQtM9QcZoaG7ZyD+d9UbIci1bw=
