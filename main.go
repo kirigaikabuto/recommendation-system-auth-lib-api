@@ -82,6 +82,9 @@ func run(c *cli.Context) error {
 		Host: "localhost",
 		Port: "6379",
 	})
+	if err != nil {
+		return err
+	}
 	amqpRequests := auth_lib.NewAmqpRequests(clt)
 	service := auth_lib.NewAuthLibService(amqpRequests, *redisStore)
 	httpEndpoints := auth_lib.NewHttpEndpoints(setdata_common.NewCommandHandler(service))
@@ -92,6 +95,8 @@ func run(c *cli.Context) error {
 
 	router.Methods("POST").Path("/users/login").HandlerFunc(httpEndpoints.MakeLoginEndpoint())
 	router.Methods("POST").Path("/users/register").HandlerFunc(httpEndpoints.MakeRegisterEndpoint())
+
+	router.Methods("GET").Path("/movies").HandlerFunc(httpEndpoints.MakeListMovies())
 	fmt.Println("server is running on port " + port)
 	http.ListenAndServe(":"+port, router)
 	return nil
