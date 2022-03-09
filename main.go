@@ -7,8 +7,8 @@ import (
 	"github.com/joho/godotenv"
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
 	setdata_common "github.com/kirigaikabuto/setdata-common"
+// 	mdw "github.com/kirigaikabuto/setdata-common/mdw"
 	redis_lib "github.com/kirigaikabuto/setdata-common/redis_connect"
-
 	"github.com/urfave/cli"
 	"net/http"
 	"os"
@@ -86,6 +86,8 @@ func run(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+// 	mdw := mdw.NewMiddleware(redisStore)
+
 	amqpRequests := auth_lib.NewAmqpRequests(clt)
 	service := auth_lib.NewAuthLibService(amqpRequests, *redisStore)
 	httpEndpoints := auth_lib.NewHttpEndpoints(setdata_common.NewCommandHandler(service))
