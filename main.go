@@ -5,10 +5,12 @@ import (
 	"github.com/djumanoff/amqp"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	protos2 "github.com/kirigaikabuto/RecommendationSystemPythonApi/protos"
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
 	auth_lib_tkn "github.com/kirigaikabuto/recommendation-system-auth-lib/auth"
 	setdata_common "github.com/kirigaikabuto/setdata-common"
 	"github.com/urfave/cli"
+	"google.golang.org/grpc"
 	"os"
 	"strconv"
 )
@@ -87,9 +89,15 @@ func run(c *cli.Context) error {
 	mdw := auth_lib_tkn.NewMiddleware(redisStore)
 
 	amqpRequests := auth_lib.NewAmqpRequests(clt)
-	service := auth_lib.NewAuthLibService(amqpRequests, redisStore)
+	//grpc client
+	connGrpc, err := grpc.Dial(":50051", grpc.WithInsecure())
+	if err != nil {
+		return err
+	}
+	defer connGrpc.Close()
+	clientGrpc := protos2.NewGreeterClient(connGrpc)
+	service := auth_lib.NewAuthLibService(amqpRequests, redisStore, clientGrpc)
 	httpEndpoints := auth_lib.NewHttpEndpoints(setdata_common.NewCommandHandler(service))
-
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
@@ -109,6 +117,7 @@ func run(c *cli.Context) error {
 	moviesGroup := r.Group("/movies", mdw.MakeMiddleware())
 	{
 		moviesGroup.GET("/", httpEndpoints.MakeListMovies())
+		moviesGroup.GET("/collrec", httpEndpoints.MakeListCollaborativeFiltering())
 	}
 	return r.Run()
 }
