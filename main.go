@@ -3,14 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/djumanoff/amqp"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
+	auth_lib_tkn "github.com/kirigaikabuto/recommendation-system-auth-lib/auth"
 	setdata_common "github.com/kirigaikabuto/setdata-common"
-// 	mdw "github.com/kirigaikabuto/setdata-common/mdw"
-	redis_lib "github.com/kirigaikabuto/setdata-common/redis_connect"
 	"github.com/urfave/cli"
-	"net/http"
 	"os"
 	"strconv"
 )
@@ -79,28 +77,38 @@ func run(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	redisStore, err := redis_lib.NewRedisConnectStore(redis_lib.RedisConfig{
+	redisStore, err := auth_lib_tkn.NewTokenStore(auth_lib_tkn.RedisConfig{
 		Host: "localhost",
 		Port: "6379",
 	})
 	if err != nil {
 		return err
 	}
-// 	mdw := mdw.NewMiddleware(redisStore)
+	mdw := auth_lib_tkn.NewMiddleware(redisStore)
 
 	amqpRequests := auth_lib.NewAmqpRequests(clt)
-	service := auth_lib.NewAuthLibService(amqpRequests, *redisStore)
+	service := auth_lib.NewAuthLibService(amqpRequests, redisStore)
 	httpEndpoints := auth_lib.NewHttpEndpoints(setdata_common.NewCommandHandler(service))
-	router := mux.NewRouter()
 
-	router.Methods("POST").Path("/score").HandlerFunc(httpEndpoints.MakeCreateScoreEndpoint())
-	router.Methods("GET").Path("/score").HandlerFunc(httpEndpoints.MakeListScoreEndpoint())
+	gin.SetMode(gin.ReleaseMode)
 
-	router.Methods("POST").Path("/users/login").HandlerFunc(httpEndpoints.MakeLoginEndpoint())
-	router.Methods("POST").Path("/users/register").HandlerFunc(httpEndpoints.MakeRegisterEndpoint())
+	r := gin.Default()
 
-	router.Methods("GET").Path("/movies").HandlerFunc(httpEndpoints.MakeListMovies())
-	fmt.Println("server is running on port " + port)
-	http.ListenAndServe(":"+port, router)
-	return nil
+	authGroup := r.Group("/auth")
+	{
+		authGroup.POST("/login", httpEndpoints.MakeLoginEndpoint())
+		authGroup.POST("/register", httpEndpoints.MakeRegisterEndpoint())
+	}
+
+	scoreGroup := r.Group("/score", mdw.MakeMiddleware())
+	{
+		scoreGroup.POST("/", httpEndpoints.MakeCreateScoreEndpoint())
+		scoreGroup.GET("/", httpEndpoints.MakeListScoreEndpoint())
+	}
+
+	moviesGroup := r.Group("/movies", mdw.MakeMiddleware())
+	{
+		moviesGroup.GET("/", httpEndpoints.MakeListMovies())
+	}
+	return r.Run()
 }
