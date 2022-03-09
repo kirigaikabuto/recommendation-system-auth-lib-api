@@ -13,7 +13,10 @@ import (
 	"google.golang.org/grpc"
 	"os"
 	"strconv"
+	"time"
+	"github.com/itsjamie/gin-cors"
 )
+
 
 var (
 	configPath = ".env"
@@ -64,7 +67,7 @@ func main() {
 func run(c *cli.Context) error {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8000"
 	}
 	parseEnvFile()
 	amqpConfig := amqp.Config{
@@ -101,7 +104,6 @@ func run(c *cli.Context) error {
 	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.Default()
-
 	authGroup := r.Group("/auth")
 	{
 		authGroup.POST("/login", httpEndpoints.MakeLoginEndpoint())
@@ -114,10 +116,20 @@ func run(c *cli.Context) error {
 		scoreGroup.GET("/", httpEndpoints.MakeListScoreEndpoint())
 	}
 
-	moviesGroup := r.Group("/movies", mdw.MakeMiddleware())
+	moviesGroup := r.Group("/movies")
 	{
 		moviesGroup.GET("/", httpEndpoints.MakeListMovies())
 		moviesGroup.GET("/collrec", httpEndpoints.MakeListCollaborativeFiltering())
 	}
-	return r.Run()
+	r.Use(cors.Middleware(cors.Config{
+		Origins:        "*",
+		Methods:        "GET, PUT, POST, DELETE, OPTIONS",
+		RequestHeaders: "Origin, Authorization, Content-Type",
+		ExposedHeaders: "",
+		MaxAge: 50 * time.Second,
+		Credentials: false,
+		ValidateHeaders: false,
+	}))
+	fmt.Println("server start in port:" + port)
+	return r.Run(":" + port)
 }
