@@ -105,6 +105,12 @@ github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309163315-d3
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309163315-d39bff0f784d/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309164348-94b73ba8921b h1:wYAI6VDaRu3U2IGnLZRjPHOgd3x9w8c4Xnyf7KGxo1w=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309164348-94b73ba8921b/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309165112-c18bf3f12a45 h1:BKj4P7pfY839Id9XGu4Y9zbHpW12djJRqOfK/lAEVsM=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309165112-c18bf3f12a45/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309165541-e9c158822124 h1:0w7puAttDikykDoAkM0oPXhgUTsBECz1oC8RztSGv2E=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309165541-e9c158822124/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309170043-28540de557b3 h1:I0H5Dj6dDFI4yQ0r107YR3ThSsf2yblUvnXhNf3t/28=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309170043-28540de557b3/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f h1:mgBc7cOPbrq4OlQJeimXfTOF2gv3dby69FT/NUqs5LI=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f/go.mod h1:RLEbCI9YiFH5E5JIAhU5wtmgtDzNASHNTScJIui1Y4s=
 github.com/kirigaikabuto/recommendation-system-score-store v0.0.0-20211104112242-1f62f5f6a39f h1:+FMFqhNIEL8OWOkJsHQtM9QcZoaG7ZyD+d9UbIci1bw=
