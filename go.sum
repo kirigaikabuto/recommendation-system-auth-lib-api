@@ -85,6 +85,10 @@ github.com/json-iterator/go v1.1.9 h1:9yzud/Ht36ygwatGx56VwCZtlI/2AD15T1X2sjSuGn
 github.com/json-iterator/go v1.1.9/go.mod h1:KdQUCv79m/52Kvf8AW2vK1V8akMuk1QjK/uOdHXbAo4=
 github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220309154312-a1b713b5dcac h1:CA4eWmTxCQ182BZPYYLtfpS3OMcw38Hg5L2YPs1xi3o=
 github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220309154312-a1b713b5dcac/go.mod h1:KxSB7dZK5Zwui/c/FK2rz6QccQmXR+rkK9YYPb7CvJA=
+github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220310155622-e4dbab2e38cb h1:zMoFgkOIX+XGmBw1MpIp7ai46BZZADKmwGtP5Shgd9Q=
+github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220310155622-e4dbab2e38cb/go.mod h1:KxSB7dZK5Zwui/c/FK2rz6QccQmXR+rkK9YYPb7CvJA=
+github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220310161110-8815a2a213d0 h1:urnYJMHkNT5Pk+WD2YbrypmsLe2Y05wp9SNkuCfsaZM=
+github.com/kirigaikabuto/RecommendationSystemPythonApi v0.0.0-20220310161110-8815a2a213d0/go.mod h1:KxSB7dZK5Zwui/c/FK2rz6QccQmXR+rkK9YYPb7CvJA=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211104114915-8efdb266168d h1:fT52j2XEGPaDek92wdfPHFVn6cpwdcIeURqOLYQOWsI=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211104114915-8efdb266168d/go.mod h1:H9FabaZCzWV57G/81rLn6kQGWre1n+jqBHULUl29HFs=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20211104115557-fba3ff94b8a0 h1:pAGVx4cFj0yjuxNC6PF2vrx4pV9YT6EMPyGljAMSi6g=
@@ -125,6 +129,10 @@ github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309182422-d2
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309182422-d287ee397f7b/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309183131-dc4e2bfdcf3f h1:oiU1krEbPLmPPM1nNnzoB5NsMHcw9wDJSTOfdp9+B8o=
 github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220309183131-dc4e2bfdcf3f/go.mod h1:cf06fGtmvLHLx+PMnY/ZvWUn0WfSRDCjUY/ClWG9bd8=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220310155844-1822a68b5cac h1:GkZCT9mVhNsh2qtTxz+ZgxdcUFqGzexIaefazHAxWUc=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220310155844-1822a68b5cac/go.mod h1:SpUKAWB9xJyAFhwpbk578FRgNjnA4ciivqLZuvjvs7E=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220310161624-a258fe42d6a1 h1:owQsljRFIFYvzwEe4mjd82zb+LYf3o9bawdsPGM7v+8=
+github.com/kirigaikabuto/recommendation-system-auth-lib v0.0.0-20220310161624-a258fe42d6a1/go.mod h1:8/uVwLwdQXy52gFJWXWivPV4DuXyb2MfdOxDv6F+9PE=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f h1:mgBc7cOPbrq4OlQJeimXfTOF2gv3dby69FT/NUqs5LI=
 github.com/kirigaikabuto/recommendation-system-movie-store v0.0.0-20211104103424-e1a72c7b635f/go.mod h1:RLEbCI9YiFH5E5JIAhU5wtmgtDzNASHNTScJIui1Y4s=
 github.com/kirigaikabuto/recommendation-system-score-store v0.0.0-20211104112242-1f62f5f6a39f h1:+FMFqhNIEL8OWOkJsHQtM9QcZoaG7ZyD+d9UbIci1bw=

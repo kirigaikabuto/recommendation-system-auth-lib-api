@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/djumanoff/amqp"
 	"github.com/gin-gonic/gin"
+	"github.com/itsjamie/gin-cors"
 	"github.com/joho/godotenv"
 	protos2 "github.com/kirigaikabuto/RecommendationSystemPythonApi/protos"
 	auth_lib "github.com/kirigaikabuto/recommendation-system-auth-lib"
@@ -14,9 +15,7 @@ import (
 	"os"
 	"strconv"
 	"time"
-	"github.com/itsjamie/gin-cors"
 )
-
 
 var (
 	configPath = ".env"
@@ -119,15 +118,16 @@ func run(c *cli.Context) error {
 	moviesGroup := r.Group("/movies")
 	{
 		moviesGroup.GET("/", httpEndpoints.MakeListMovies())
-		moviesGroup.GET("/collrec", httpEndpoints.MakeListCollaborativeFiltering())
+		moviesGroup.GET("/collrec", mdw.MakeMiddleware(), httpEndpoints.MakeListCollaborativeFiltering())
+		moviesGroup.GET("/content", mdw.MakeMiddleware(), httpEndpoints.MakeContentBasedFiltering())
 	}
 	r.Use(cors.Middleware(cors.Config{
-		Origins:        "*",
-		Methods:        "GET, PUT, POST, DELETE, OPTIONS",
-		RequestHeaders: "Origin, Authorization, Content-Type",
-		ExposedHeaders: "",
-		MaxAge: 50 * time.Second,
-		Credentials: false,
+		Origins:         "*",
+		Methods:         "GET, PUT, POST, DELETE, OPTIONS",
+		RequestHeaders:  "Origin, Authorization, Content-Type",
+		ExposedHeaders:  "",
+		MaxAge:          50 * time.Second,
+		Credentials:     false,
 		ValidateHeaders: false,
 	}))
 	fmt.Println("server start in port:" + port)
