@@ -18,11 +18,12 @@ import (
 )
 
 var (
-	configPath = ".env"
-	version    = "0.0.1"
-	amqpHost   = ""
-	amqpPort   = 0
-	flags      = []cli.Flag{
+	configPath  = ".env"
+	version     = "0.0.1"
+	amqpHost    = ""
+	amqpPort    = 0
+	amqpUrlProd = "amqp://test:test@192.168.0.12:5672"
+	flags       = []cli.Flag{
 		&cli.StringFlag{
 			Name:        "config, c",
 			Usage:       "path to .env config file",
@@ -70,7 +71,8 @@ func run(c *cli.Context) error {
 	}
 	parseEnvFile()
 	amqpConfig := amqp.Config{
-		AMQPUrl: "amqp://" + amqpHost + ":" + strconv.Itoa(amqpPort),
+		Host: "localhost",
+		Port: 5672,
 	}
 	sess := amqp.NewSession(amqpConfig)
 	err := sess.Connect()
@@ -131,5 +133,5 @@ func run(c *cli.Context) error {
 		ValidateHeaders: false,
 	}))
 	fmt.Println("server start in port:" + port)
-	return r.Run(":" + port)
+	return r.Run("0.0.0.0:" + port)
 }
