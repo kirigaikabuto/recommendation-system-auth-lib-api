@@ -13,17 +13,16 @@ import (
 	"github.com/urfave/cli"
 	"google.golang.org/grpc"
 	"os"
-	"strconv"
 	"time"
 )
 
 var (
-	configPath  = ".env"
-	version     = "0.0.1"
-	amqpHost    = ""
-	amqpPort    = 0
-	amqpUrlProd = "amqp://test:test@192.168.0.12:5672"
-	flags       = []cli.Flag{
+	configPath = ""
+	version    = "0.0.1"
+	amqpUrl    = ""
+	redisHost  = ""
+	redisPort  = ""
+	flags      = []cli.Flag{
 		&cli.StringFlag{
 			Name:        "config, c",
 			Usage:       "path to .env config file",
@@ -34,18 +33,18 @@ var (
 
 func parseEnvFile() {
 	// Parse config file (.env) if path to it specified and populate env vars
+	fmt.Println(configPath)
 	if configPath != "" {
 		godotenv.Overload(configPath)
+	} else {
+		godotenv.Overload("helm/dev.env")
 	}
-	amqpHost = os.Getenv("RABBIT_HOST")
-	amqpPortStr := os.Getenv("RABBIT_PORT")
-	amqpPort, _ = strconv.Atoi(amqpPortStr)
-	if amqpPort == 0 {
-		amqpPort = 5672
-	}
-	if amqpHost == "" {
-		amqpHost = "localhost"
-	}
+	amqpUrl = os.Getenv("AMQP_URL")
+	redisHost = os.Getenv("REDIS_HOST")
+	redisPort = os.Getenv("REDIS_PORT")
+	fmt.Println(amqpUrl)
+	fmt.Println(redisHost)
+	fmt.Println(redisPort)
 }
 
 func main() {
@@ -71,8 +70,7 @@ func run(c *cli.Context) error {
 	}
 	parseEnvFile()
 	amqpConfig := amqp.Config{
-		Host: "localhost",
-		Port: 5672,
+		AMQPUrl: amqpUrl,
 	}
 	sess := amqp.NewSession(amqpConfig)
 	err := sess.Connect()
@@ -84,8 +82,8 @@ func run(c *cli.Context) error {
 		return err
 	}
 	redisStore, err := auth_lib_tkn.NewTokenStore(auth_lib_tkn.RedisConfig{
-		Host: "localhost",
-		Port: "6379",
+		Host: redisHost,
+		Port: redisPort,
 	})
 	if err != nil {
 		return err

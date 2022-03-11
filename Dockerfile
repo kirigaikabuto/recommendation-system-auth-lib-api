@@ -7,9 +7,10 @@ COPY go.sum ./
 RUN go mod download
 
 COPY *.go ./
+COPY *.env ./
 
-RUN go build -o /recommendation-system-auth-lib-api
+RUN go build -o /rec-api
 
 EXPOSE 8000
 
-CMD [ "/recommendation-system-auth-lib-api" ]
+CMD [ "/rec-api -c=prod.env" ]
