@@ -9,6 +9,10 @@ services:
     depends_on:
       - redis
       - rabbit
+  work_app:
+    image: work-api
+    depends_on:
+      - rabbit
   redis:
     image: redis
     ports:
