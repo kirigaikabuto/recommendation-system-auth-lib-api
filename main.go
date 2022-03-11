@@ -37,7 +37,7 @@ func parseEnvFile() {
 	if configPath != "" {
 		godotenv.Overload(configPath)
 	} else {
-		godotenv.Overload("helm/dev.env")
+		godotenv.Overload("dev.env")
 	}
 	amqpUrl = os.Getenv("AMQP_URL")
 	redisHost = os.Getenv("REDIS_HOST")

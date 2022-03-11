@@ -13,4 +13,4 @@ RUN go build -o /rec-api
 
 EXPOSE 8000
 
-CMD [ "/rec-api -c=prod.env" ]
+CMD [ "/rec-api", "-c", "prod.env" ]
